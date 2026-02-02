@@ -1,0 +1,400 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap');
+
+html {
+  scroll-behavior: smooth; /* This enables the gliding effect site-wide */
+  scroll-padding-top: 80px; /* Prevents the fixed navbar from covering the section title */
+}
+
+:root {
+  --neon-green: #00ff41;
+  --dark-void: #0a0a0a;
+  --terminal-gray: #1a1a1a;
+  --text-dim: #a0a0a0;
+  font-family: 'Fira Code', monospace;
+}
+
+body {
+  margin: 0;
+  background-color: var(--dark-void);
+  color: var(--text-dim);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* The Glow Effect for Headers */
+h1, h2, h3 {
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+}
+
+h2 {
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid var(--terminal-gray);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Adds a [CMD] prefix to every section header */
+h2::before {
+  content: "[SYS_INIT] ";
+  font-size: 0.8rem;
+  margin-right: 15px;
+  color: #555;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1; /* We'll put graphics behind this later */
+}
+
+.project-card {
+  background: rgba(26, 26, 26, 0.8); /* Semi-transparent for depth */
+  border: 1px solid #333;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* The "Boot-up" Glow on Hover */
+.project-card:hover {
+  border-color: var(--neon-green);
+  box-shadow: 0 0 20px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.1);
+  transform: translateY(-8px) scale(1.01);
+}
+
+/* Adding a 'bracket' design to the corners for a technical look */
+.project-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.project-card:hover::before {
+  border-color: var(--neon-green);
+}
+
+/* Custom list styling for skills inside cards */
+.project-card ul {
+  margin-top: 10px;
+  color: var(--text-dim);
+}
+
+.project-card li {
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+  color: #ccc;
+}
+.cursor {
+  animation: blink 1s step-end infinite;
+  color: var(--neon-green);
+  font-weight: bold;
+}
+
+@keyframes blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+/* The Scanline Overlay */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%, 
+      rgba(0, 0, 0, 0.1) 50%
+    ), 
+    linear-gradient(
+      90deg, 
+      rgba(255, 0, 0, 0.02), 
+      rgba(0, 255, 0, 0.01), 
+      rgba(0, 0, 255, 0.02)
+    );
+  z-index: 9999; /* Sits on top of everything */
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none; /* Allows you to still click buttons underneath */
+}
+
+/* Subtle CRT Flicker */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.95; }
+  25% { opacity: 0.98; }
+  30% { opacity: 0.95; }
+  100% { opacity: 1; }
+}
+
+.container {
+  animation: flicker 0.15s infinite;
+}
+
+/* Creating the digital grid background */
+body {
+  background-image: 
+    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px; /* The size of each grid square */
+  background-position: center;
+  animation: grid-move 20s linear infinite;
+}
+
+/* Moving the grid to create a sense of motion */
+@keyframes grid-move {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 50px 50px;
+  }
+}
+
+/* Add a radial gradient overlay to make the edges darker */
+/* This creates a 'vignette' so the focus stays on your content */
+.container::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 20%, var(--dark-void) 80%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.status-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(10, 10, 10, 0.9);
+  border-top: 1px solid var(--neon-green);
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  z-index: 10000;
+  color: var(--text-dim);
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: var(--neon-green);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+  box-shadow: 0 0 8px var(--neon-green);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+.btn {
+  background: transparent;
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn:hover {
+  background: var(--neon-green);
+  color: black;
+  box-shadow: 0 0 20px var(--neon-green);
+}
+/* Updated H2 with Centering Logic */
+h2 {
+  color: var(--neon-green);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid var(--terminal-gray);
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Default: Left for About/Projects */
+}
+
+/* Special Class for Centered Headers (Reach Me) */
+.header-center {
+  justify-content: center !important;
+  text-align: center;
+}
+
+h2::before {
+  content: "[SYS_INIT] ";
+  font-size: 0.8rem;
+  margin-right: 15px;
+  color: #555;
+}
+
+/* Combined Body Styles */
+body {
+  margin: 0;
+  background-color: var(--dark-void);
+  color: var(--text-dim);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Grid Background */
+  background-image: 
+    linear-gradient(rgba(0, 255, 65, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: center;
+  animation: grid-move 20s linear infinite;
+}
+
+/* Ensure buttons don't have default blue link styling */
+.btn {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.nav-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--neon-green);
+  display: flex;
+  justify-content: flex-start; /* Changed from space-between */
+  align-items: center;
+  padding: 0 20px; /* Reduced padding to prevent overflow */
+  z-index: 10001;
+}
+
+.nav-logo {
+  color: var(--neon-green);
+  font-weight: bold;
+  letter-spacing: 2px;
+  font-size: 0.9rem;
+  margin-right: auto; /* Pushes the logo to the far left and links to the right */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px; /* Adjusted gap for better fit */
+  margin-right: 40px; /* Ensures the last link isn't hugging the edge */
+}
+
+.nav-item {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-item:hover {
+  color: var(--neon-green);
+  text-shadow: 0 0 8px var(--neon-green);
+}
+
+/* Small underline indicator on hover */
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--neon-green);
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* Ensure content doesn't get hidden under the fixed nav */
+.container {
+  padding-top: 100px !important;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+}
+
+.modal-content {
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 2px solid var(--neon-green) !important;
+  background: var(--dark-void) !important;
+  padding: 40px !important;
+  position: relative;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: #555;
+  font-family: 'Fira Code', monospace;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  color: var(--neon-green);
+}
+
+.modal-body {
+  margin: 20px 0;
+  line-height: 1.8;
+  color: #ccc;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-left: 3px solid var(--neon-green);
+  font-size: 0.95rem;
+  white-space: pre-wrap; /* Preserves formatting */
+}
+
