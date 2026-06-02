@@ -22,6 +22,13 @@ const profileData = {
   ],
   projects: [
   { 
+    title: "Malware Detector using Python & YARA", 
+    tech: "Python, YARA, MalwareBazaar API", 
+    desc: "Built an automated detection engine and custom signature library to triage live malware samples.", 
+    longDesc: "Developed a lightweight threat detection tool using the yara-python library to scan binaries against custom-authored heuristic rules. The project involved building a modular scanning script that automates the ingestion of live, real-world malware samples from MalwareBazaar, executing them safely in an isolated Kali Linux sandbox, and generating automated triage logs mapped to specific threat behaviors and persistence mechanisms.",
+    link: "https://github.com/yogithaaah/Malware-Detector" 
+  },
+  { 
     title: "Web Application Firewall (WAF)", 
     tech: "Safeline, Docker, DVWA", 
     desc: "Deployed a security-hardened environment to intercept and mitigate web-based attacks.", 
@@ -29,32 +36,20 @@ const profileData = {
     substack: "https://yogithatippireddy.substack.com/p/i-built-a-web-application-firewall" 
   },
   { 
+    title: "Linux System Resource Manager", 
+    tech: "C++, Linux Systems Programming", 
+    desc: "Developed a high-performance CLI tool to capture real-time system telemetry by parsing the Linux /proc filesystem.",
+    longDesc: "Engineered a low-overhead systems monitoring utility in C++ that interfaces directly with the Linux kernel via the /proc pseudo-filesystem. Implemented highly efficient file I/O operations to continuously track active process lifecycles, CPU utilization, and memory consumption. The project establishes baseline system telemetry to detect anomalous behavior, unauthorized binary execution, or resource-heavy processes like crypto-jacking malware.",
+    link: "https://github.com/yogithaaah/Linux-Resource-Monitor"
+  },
+  { 
     title: "Insider Threat Detection", 
     tech: "Python, Deep Learning", 
     desc: "Used Deep learning techniques to predict insider threats.", 
     longDesc: "A research-focused project utilizing the CMU-CERT dataset. I developed an LSTM (Long Short-Term Memory) neural network to detect anomalous user behavior in event logs. The model achieves high accuracy in identifying unauthorized data exfiltration patterns before they escalate into full breaches.",
     link: "https://github.com/yogithaaah/Insider-Threat-Detection"
-  },
-  { 
-    title: "Cybersecurity Home Lab", 
-    tech: "Kali Linux, VirtualBox", 
-    desc: "Established a virtualized environment for hands-on network security and penetration testing.", 
-    longDesc: "Designed and configured a cybersecurity home lab using VirtualBox to host Kali Linux. I utilized the environment to practice network reconnaissance with Nmap, packet inspection via Wireshark, building a strong foundation in offensive security methodologies.",
-    substack: "https://yogithatippireddy.substack.com/p/getting-started-with-kali-linux-for"
-  },
-  { 
-    title: "Phishing Attack Simulator", 
-    tech: "GoPhish, Railway", 
-    desc: "Simulated real-world phishing attacks to evaluate user behavior.", 
-    longDesc: "Using the GoPhish framework, I simulated end-to-end social engineering campaigns. I configured custom SMTP relays and landing pages to harvest simulated credentials. The project focused on analyzing 'click-through' metrics to design better security awareness training for organizations."
-  },
-  { 
-    title: "Python Keylogger", 
-    tech: "Python, Offensive Security", 
-    desc: "A simple keylogger that records keystrokes to a text file.", 
-    longDesc: "This Python-based keylogger leverages the pynput library to intercept and record real-time keyboard input through system-level event listeners. The application demonstrates event-driven programming and asynchronous file I/O by capturing keystrokes and persistently logging them to a local text file.",
-    link: "https://github.com/yogithaaah/Keylogger"
   }
+  
 ],
   skills: {
     Frameworks: ["OWASP Top 10", "NIST Cybersecurity Framework", "Burp Suite", "Web Application Security"],
